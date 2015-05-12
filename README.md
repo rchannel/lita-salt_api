@@ -13,6 +13,10 @@ gem "lita-salt_api"
 ## Configuration
 
 TODO: Describe any configuration attributes the plugin exposes.
+  ##Salt_Api
+  config.handlers.salt_api.url = "https://salt-server.api.example.com:8000"
+  config.handlers.salt_api.user = ["SALTapi_USERNAME"]
+  config.handlers.salt_api.pass =  ["PASSWORD"]
 
 ## Usage
 
