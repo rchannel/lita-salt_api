@@ -6,9 +6,9 @@ module Lita
     config :pass	
     
     route /^s(?:alt)it ping$/i, :test_ping, command: true, help: {
-      'salt up' => 'lists alive minions'})
+      'saltit ping on server' => 'lists alive minions'}
     route /^s(?:alt)it restart$/i, :service_restart, command: true, help: {
-      'salt up' => 'restarts services'})
+      'saltit restart on server' => 'restarts services'}
 
     def test_ping(response)
     	server = response.matches[0][1]
