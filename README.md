@@ -1,6 +1,6 @@
 # lita-salt_api
-
-TODO: Add a description of the plugin.
+BETA
+Lita handler to interface with salt-api.
 
 ## Installation
 
@@ -12,8 +12,9 @@ gem "lita-salt_api"
 
 ## Configuration
 
-TODO: Describe any configuration attributes the plugin exposes.
-  ##Salt_Api
+You need to configure the url, username and password in lita_config.rb
+ Example:
+ ##Salt_Api
   config.handlers.salt_api.url = "https://salt-server.api.example.com:8000"
   config.handlers.salt_api.user = ["SALTapi_USERNAME"]
   config.handlers.salt_api.pass = ["PASSWORD"]
@@ -21,3 +22,4 @@ TODO: Describe any configuration attributes the plugin exposes.
 ## Usage
 
 TODO: Describe the plugin's features and how to use them.
+

@@ -18,8 +18,21 @@ module Lita
       "saltops highstate on server" => "runs a state.highstate on server"})
     
     def test_ping(response)
-    	server = response.matches[0][0]
-    	response.reply(server)
+        server = response.matches[0][0]
+        payload = '{\'client\':\'local\',
+                    \'tgt\':server,
+                    \'fun\':\'test.ping\'}'
+        uri = config.url
+        c = Curl::Easy.new
+        c.http_auth_types = :pam
+        c.ssl_verify_peer = false
+        c.username = config.user
+        c.password = config.pass
+        c.http_post(uri, payload) do |curl| 
+          curl.headers["Content-Type"] = ["application/json"]
+        end
+    	response.reply(c.body_str)
+        #responce.reply(user)
     end
 
     def service_restart(response)
