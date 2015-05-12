@@ -1,11 +1,12 @@
 module Lita
   module Handlers
     class SaltApi < Handler
+    require 'curb'
     config :url
     config :user
     config :pass	
     
-    route(/^saltit ping\s+(.+)/, :test_ping, command: true, help: {
+    route(/^saltit ping on\s+(.+)/, :test_ping, command: true, help: {
       "saltit ping on server" => "lists alive minions"})
     route(/^saltit restart\s+(.+)/, :service_restart, command: true, help: {
       "saltit restart on server" => "restarts services"})
@@ -15,9 +16,10 @@ module Lita
       "saltops start on server" => "starts service on a server"})
     route(/^saltops highstate\s+(.+)/, :highstate, command: true, help: {
       "saltops highstate on server" => "runs a state.highstate on server"})
+    
     def test_ping(response)
-    	server = response.matches[0][1]
-    	response.reply "True"
+    	server = response.matches[0][0]
+    	response.reply(server)
     end
 
     def service_restart(response)
