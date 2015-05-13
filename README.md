@@ -1,4 +1,4 @@
-# lita-salt_api
+﻿# lita-salt_api
 BETA
 Lita handler to interface with salt-api.
 
@@ -14,10 +14,10 @@ gem "lita-salt_api"
 
 You need to configure the url, username and password in lita_config.rb
  Example:
- ##Salt_Api
-  config.handlers.salt_api.url = "https://salt-server.api.example.com:8000"
-  config.handlers.salt_api.user = ["SALTapi_USERNAME"]
-  config.handlers.salt_api.pass = ["PASSWORD"]
+  - ##Salt_Api
+  - config.handlers.salt_api.url = "https://salt-server.api.example.com:8000"
+  - config.handlers.salt_api.user = "SALTapi_USERNAME"
+  - config.handlers.salt_api.pass = "PASSWORD"
 
 ## Usage
 
