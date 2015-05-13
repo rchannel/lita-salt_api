@@ -30,7 +30,11 @@ module Lita
                                 :client => "local", :tgt => "#{server}", :fun => "test.ping", 
                                 :debug_output => $stdout, header: "Accept: application/x-yaml"})
         stat = awesome.body
-        response.reply(stat)
+        if stat == "{\"return\": [{}]}"
+            response.reply("Server not found: #{server}")
+        else 
+            response.reply(stat)
+        end
     end
 
     def service_restart(response)
@@ -44,7 +48,11 @@ module Lita
                                 :client => "local", :tgt => "#{server}", :fun => "service.restart", :arg => "#{service}",
                                 :debug_output => $stdout, header: "Accept: application/x-yaml"})
         stat = awesome.body
-        response.reply(stat)
+        if stat == "{\"return\": [{}]}"
+            response.reply("Server not found: #{server}")
+        else 
+            response.reply(stat)
+        end
     end	
     
     def service_start(response)
@@ -57,7 +65,11 @@ module Lita
                                     :client => "local", :tgt => "#{server}", :fun => "service.start", :arg => "#{service}", 
                                     :debug_output => $stdout, header: "Accept: application/x-yaml"})
         stat = awesome.body
-        response.reply(stat)
+        if stat == "{\"return\": [{}]}"
+            response.reply("Server not found: #{server}")
+        else 
+            response.reply(stat)
+        end
     end	
 
     def service_stop(response)
@@ -70,7 +82,11 @@ module Lita
                                     :client => "local", :tgt => "#{server}", :fun => "service.stop", :arg => "#{service}",
                                     :debug_output => $stdout, header: "Accept: application/x-yaml"})
         stat = awesome.body
-        response.reply(stat)
+        if stat == "{\"return\": [{}]}"
+            response.reply("Server not found: #{server}")
+        else 
+            response.reply(stat)
+        end
     end	
 
     def highstate(response)
