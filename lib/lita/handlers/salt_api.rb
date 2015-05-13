@@ -2,6 +2,7 @@ module Lita
   module Handlers
     class SaltApi < Handler
     require 'curb'
+    require 'httparty'
     config :url
     config :user
     config :pass	
@@ -19,20 +20,15 @@ module Lita
     
     def test_ping(response)
         server = response.matches[0][0]
-        payload = '{\'client\':\'local\',
-                    \'tgt\':server,
-                    \'fun\':\'test.ping\'}'
-        uri = config.url
-        c = Curl::Easy.new
-        c.http_auth_types = :pam
-        c.ssl_verify_peer = false
-        c.username = config.user
-        c.password = config.pass
-        c.http_post(uri, payload) do |curl| 
-          curl.headers["Content-Type"] = ["application/json"]
-        end
-    	response.reply(c.body_str)
-        #responce.reply(user)
+        url = config.url
+        username = config.user
+        password = config.pass
+        awesome = HTTParty.post("#{url}/run", :verify => false, :body => {:username => #{username}, :password => #{password}, :eauth => "pam",
+                                :client => "local", :tgt => "#{server}", :fun => "test.ping"},
+                                :debug_output => $stdout, :headers => {"Accept" => "application/x-yaml"})
+        puts awesome.inspect
+        stat = awesome.message
+        response.reply(stat)
     end
 
     def service_restart(response)
