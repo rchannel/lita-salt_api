@@ -1,7 +1,6 @@
 module Lita
   module Handlers
     class SaltApi < Handler
-    require 'curb'
     require 'httparty'
     config :url
     config :user
@@ -12,11 +11,11 @@ module Lita
       "saltit ping on server" => "lists alive minions"})
     route(/^saltit restart (.*) on (.*)$/i, :service_restart, command: true, help: {
       "saltit restart on server" => "saltit restart servicename on servername"})
-    route(/^saltops stop (.*) on (.*)$/i, :service_stop, command: true, help: {
+    route(/^saltops stop (.*) on (.*)$/i, :service_stop, command: true, restrict_to: [:ops], help: {
       "saltops stop on server" => "saltops stop servicename on servername"})
-    route(/^saltops start (.*) on (.*)$/i, :service_start, command: true, help: {
+    route(/^saltops start (.*) on (.*)$/i, :service_start, command: true, restrict_to: [:ops], help: {
       "saltops start on server" => "saltops start servicename on servername"})
-    route(/^saltops highstate on\s+(.+)/, :highstate, command: true,  help: {
+    route(/^saltops highstate on\s+(.+)/, :highstate, command: true, restrict_to: [:ops], help: {
       "saltops highstate on server" => "runs a state.highstate on server"})
     #route(/^saltit cmd (.*) on (.*)$/i, :service_start, command: true, help: {
     #  "saltops cmd.run on server" => "will run a cmd on a server"})
